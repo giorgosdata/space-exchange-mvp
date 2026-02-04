@@ -1,0 +1,22 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<h2>My account</h2>
+
+<p><strong>Credits:</strong> {{ profile.credits }}</p>
+
+<h3>Recent credit transactions</h3>
+<ul>
+    {% for tx in transactions %}
+        <li>
+            {{ tx.created_at }} — 
+            {% if tx.amount >= 0 %}+{% endif %}{{ tx.amount }} credits
+            {% if tx.reason %} ({{ tx.reason }}){% endif %}
+        </li>
+    {% empty %}
+        <li>No transactions yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'space_list' %}">Back to spaces</a>
+{% endblock %}

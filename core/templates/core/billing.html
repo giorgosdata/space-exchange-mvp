@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<h2>Buy credits</h2>
+
+<p>Current credits: {{ profile.credits }}</p>
+
+<p>Buy a pack of {{ 50 }} credits (test).</p>
+
+<form action="{% url 'create_checkout_session' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Go to Stripe Checkout</button>
+</form>
+
+<p><small>In test mode, use Stripe test card 4242 4242 4242 4242.</small></p>
+
+<a href="{% url 'my_account' %}">Back to my account</a>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<h2>My Requests</h2>
+
+<h3>Requests I sent</h3>
+<ul>
+    {% for r in sent_requests %}
+        <li>
+            {{ r.created_at }} — {{ r.space.title }} ({{ r.status }})
+            — <a href="{% url 'request_chat' r.pk %}">Open chat</a>
+            {% if r.message %} — "{{ r.message }}"{% endif %}
+        </li>
+    {% empty %}
+        <li>No sent requests.</li>
+    {% endfor %}
+</ul>
+
+<h3>Requests I received</h3>
+<ul>
+    {% for r in received_requests %}
+        <li>
+            {{ r.created_at }} — from {{ r.requester.username }} for {{ r.space.title }} ({{ r.status }})
+            — <a href="{% url 'request_chat' r.pk %}">Open chat</a>
+            {% if r.status == "pending" %}
+                — <a href="{% url 'accept_request' r.pk %}">Accept</a>
+                | <a href="{% url 'reject_request' r.pk %}">Reject</a>
+            {% endif %}
+            {% if r.message %} — "{{ r.message }}"{% endif %}
+        </li>
+    {% empty %}
+        <li>No received requests.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'space_list' %}">Back to spaces</a>
+{% endblock %}

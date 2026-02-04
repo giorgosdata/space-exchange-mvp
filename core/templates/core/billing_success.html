@@ -1,0 +1,10 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<h2>Payment successful</h2>
+
+<p>Thank you! We added {{ added }} credits to your account.</p>
+<p>Current credits: {{ profile.credits }}</p>
+
+<a href="{% url 'my_account' %}">Go to My Account</a>
+{% endblock %}

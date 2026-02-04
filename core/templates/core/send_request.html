@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<h2>Request: {{ space.title }}</h2>
+
+<p>You are sending an exchange request for this space.</p>
+
+<form method="post">
+    {% csrf_token %}
+    <p>
+        <label for="message">Message (optional):</label><br>
+        <textarea name="message" id="message" rows="4" cols="50"></textarea>
+    </p>
+    <button type="submit">Send request</button>
+</form>
+
+<a href="{% url 'space_detail' space.pk %}">Cancel</a>
+{% endblock %}

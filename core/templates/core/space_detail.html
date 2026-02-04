@@ -1,0 +1,21 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<h2>{{ space.title }}</h2>
+
+{% if space.main_image %}
+    <img src="{{ space.main_image.url }}" alt="{{ space.title }}" style="max-width:400px;">
+{% endif %}
+
+<p><strong>Location:</strong> {{ space.location }}</p>
+<p>{{ space.description }}</p>
+<p><small>Owner: {{ space.owner.username }}</small></p>
+
+{% if user.is_authenticated and user != space.owner %}
+    <p>
+        <a href="{% url 'send_exchange_request' space.id %}">Request this space</a>
+    </p>
+{% endif %}
+
+<a href="{% url 'space_list' %}">Back to list</a>
+{% endblock %}

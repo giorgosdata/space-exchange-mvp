@@ -1,0 +1,19 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<h2>Available Spaces</h2>
+
+<a href="{% url 'space_create' %}">+ Add new space</a>
+
+<ul>
+    {% for space in spaces %}
+        <li>
+            <a href="{% url 'space_detail' space.pk %}">
+                {{ space.title }} - {{ space.location }}
+            </a>
+        </li>
+    {% empty %}
+        <li>No spaces yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<h2>Chat for: {{ req.space.title }}</h2>
+<p>Status: {{ req.status }}</p>
+
+<hr>
+
+<ul>
+{% for m in messages %}
+    <li>
+        <strong>{{ m.sender.username }}</strong>: {{ m.text }}
+        <small>({{ m.created_at }})</small>
+    </li>
+{% empty %}
+    <li>No messages yet.</li>
+{% endfor %}
+</ul>
+
+<hr>
+
+<form method="post">
+    {% csrf_token %}
+    <textarea name="text" rows="3" cols="50" placeholder="Type your message..."></textarea><br>
+    <button type="submit">Send</button>
+</form>
+
+<a href="{% url 'my_requests' %}">Back to requests</a>
+{% endblock %}
